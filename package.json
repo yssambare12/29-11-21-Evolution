@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13"
+  },
+  "name": "mongooserelations",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server":"nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aakash-Naykude/mongooserelations.git"
+  },
+  "author": "Aakash Naykude",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aakash-Naykude/mongooserelations/issues"
+  },
+  "homepage": "https://github.com/Aakash-Naykude/mongooserelations#readme",
+  "description": ""
+}
