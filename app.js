@@ -1,6 +1,5 @@
 const express=require("express");
 const mongoose=require("mongoose");
-
 const connect=()=>{
     return mongoose.connect(" mongodb://127.0.0.1:27017/data");
 }
@@ -9,7 +8,7 @@ const compSchema=new mongoose.Schema({
         Company_Name:{type:String,required:true},
         Empnum:{type:Number,required:true},
         Opening_Jobs:{type:Number, required:true},
-        comp_optCost:{type:Number, required:true},
+        Cost:{type:Number, required:true},
 },
 {
   versionKey:false,
@@ -47,7 +46,7 @@ const app=express();
 app.use(express.json());
 
 
-//COMPANY POST
+//POST
 app.post("/comps",async(req,res)=>{
     try{
        const comp=Comp.create(req.body);
@@ -61,7 +60,7 @@ app.post("/comps",async(req,res)=>{
 
 
 
-//JOBS POST
+//JOBS vacciciency 
 app.post("/jobs",async(req,res)=>{
     try{
        const job=Job.create(req.body);
@@ -75,7 +74,8 @@ app.post("/jobs",async(req,res)=>{
 
 
 
-// 1  GET BY NAME and SKILL
+// GettingNAME and SKILL
+
 app.get("/jobs/:name/:skill",async(req,res)=>{
     try{
        const jobs=await Job.find({$and:[{City:req.params.name},{Skill:req.params.skill}]}).lean().exec();
@@ -87,7 +87,9 @@ app.get("/jobs/:name/:skill",async(req,res)=>{
 })
 
 
-// 2 ALL Work_From_Home Jobs
+// Work_From_Home Jobs
+
+
 app.get("/jobs/Work_From_Home",async(req,res)=>{
     try{
        const jobs=await Job.find({Work_From_Home:{$eq:"Yes"}}).lean().exec();
@@ -98,8 +100,8 @@ app.get("/jobs/Work_From_Home",async(req,res)=>{
     }
 })
 
+// NOTICE PERIOD JOBS
 
-// 3 ALL NOTICE PERIOD ACCEPTABLE JOBS
 app.get("/jobs/Notice_Period",async(req,res)=>{
     try{
        const jobs=await Job.find({Notice_Period:{$eq:"Yes"}}).lean().exec();
@@ -110,7 +112,8 @@ app.get("/jobs/Notice_Period",async(req,res)=>{
     }
 })
 
-// 4(a) SORTING JOBS WITH RATING(low to high)
+// Job sorting according to rating
+
 app.get("/jobs/sortLH",async(req,res)=>{
     try{
        const jobs=await Job.find().sort({Rating:1}).lean().exec();
@@ -122,7 +125,6 @@ app.get("/jobs/sortLH",async(req,res)=>{
 })
 
 
-// 4(b) SORTING JOBS WITH RATING(high to low)
 app.get("/jobs/sortHL",async(req,res)=>{
     try{
        const jobs=await Job.find().sort({Rating:-1}).lean().exec();
@@ -133,8 +135,8 @@ app.get("/jobs/sortHL",async(req,res)=>{
     }
 })
 
+// company details
 
-// 5 DETAILS OF COMPANY BY NAME
 app.get("/comps/:name",async(req,res)=>{
     try{
        const comp=await Comp.find({Company_Name:req.params.name}).lean().exec();
@@ -146,7 +148,8 @@ app.get("/comps/:name",async(req,res)=>{
 })
 
 
-// 6 COMPANY WITH MOST OPEN JOBS
+// macimum openign jobs
+
 app.get("/comps/opnjob",async(req,res)=>{
     try{
        const comp=await Comp.find().sort({Opening_Jobs:-1}).limit(1).lean().exec();
