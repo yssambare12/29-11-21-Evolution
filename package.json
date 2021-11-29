@@ -3,7 +3,7 @@
     "express": "^4.17.1",
     "mongoose": "^6.0.13"
   },
-  "name": "mongooserelations",
+  "name": "291121Evolution",
   "version": "1.0.0",
   "main": "app.js",
   "devDependencies": {},
@@ -13,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aakash-Naykude/mongooserelations.git"
+    "url": "git+https://github.com/yssambare12/29-11-21-Evolution.git"
   },
-  "author": "Aakash Naykude",
+  "author": "Yogesh Sambare",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Aakash-Naykude/mongooserelations/issues"
+    "url": "https://github.com/yssambare12/29-11-21-Evolution/issues"
   },
-  "homepage": "https://github.com/Aakash-Naykude/mongooserelations#readme",
+  "homepage": "https://github.com/yssambare12/29-11-21-Evolution#readme",
   "description": ""
 }
