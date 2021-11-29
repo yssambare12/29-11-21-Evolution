@@ -26,7 +26,6 @@ const companySchema = new mongoose.Schema(
         user_id : {
             type : mongoose.Schema.Types.ObjectId,
             ref: "user"
-            required: true
         },
         job_id : {
             type : mongoose.Schema.Types.ObjectId,
@@ -36,7 +35,7 @@ const companySchema = new mongoose.Schema(
     },
     {
         versionKey : false,
-        timestamps: true;
+        timestamps: true,
     }
 );
 
@@ -69,9 +68,49 @@ app.use(express.json());
 
 app.post("/users", async (req, res) => {
     try {
-        constt user = await User.create(req.body);
+        const user = await User.create(req.body);
         return res.status(201).send(user);
     } catch(e) {
         return res.status(500).json({message,status: "Failed"});
     }
 });
+
+app.get("/users", async (req, res) => {
+    try {
+        const user = await User.find().lean().exec();
+        return res.status({user});
+    } catch(e) {
+        return res.status(500).json({message,status: "Failed"});
+    }
+});
+
+
+app.get("/users\id", async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).lean().exec();
+        return res.send(user);
+    } catch(e) {
+        return res.status(500).json({message,status: "Failed"});
+    }
+});
+
+app.patch("/users/id", async (req, res) => {
+    try {
+        const user = await User.findByIdOrUpdate(req.params.id, req.body, {
+            new: true, }).lean().exex();
+        return res.status(201).send(user);
+    } catch(e) {
+        return res.status(500).json({message,status: "Failed"});
+    }
+});
+
+app.delete("/users/id", async (req, res) => {
+    try {
+        const user = await User.findByIdOrDelete(req.params.id).lean().exex();
+        return res.status(201).send(user);
+    } catch(e) {
+        return res.status(500).json({message,status: "Failed"});
+    }
+});
+
+
